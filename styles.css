@@ -190,6 +190,9 @@ main{
 #left, #right{
   font-size: 32px;
   color: rgb(50, 50, 150, 0.6);
+  height: 100px;
+  line-height: 100px;
+  background: red;
 }
 .leftSlide{
   transform: translate(-500px, 0);
@@ -209,15 +212,15 @@ main{
   line-height: 70px;
 }
 #board_input_1{
-  height: 50px;
-  width: 180px;
+  height: 40px;
+  width: 160px;
   margin: 0 5px;
   font-size: 26px;
   letter-spacing: 4px;
 }
 #board_input_2{
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   margin: 0 5px;
   font-size: 26px;
   letter-spacing: 4px;

@@ -182,6 +182,7 @@ $(function(){
   // カウント処理
   $(document).on('click', '.countButton', function(){
     count++;
+    $('.testCount').text(count);
   });
 
   // ルール説明表示
