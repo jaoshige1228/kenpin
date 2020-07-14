@@ -21,7 +21,7 @@ $(function(){
   let P_sku_2;
   // 制限時間処理関係
   let startTime;
-  const timeLimit = 17 * 1000;
+  let timeLimit;
   let timeoutId;
   // 看板たち
   const boardsOrigin = [
@@ -54,8 +54,8 @@ $(function(){
     P_sku_2 = checkList.sku_2;
     // 設定した内容をhtmlに反映
     showCheckList();
-    startTime = Date.now();
-    updateTimer();
+    // 制限時間をセット
+    setTimeLimit();
 
     $('#startScreen').removeClass('gameStart');
     $('#gameScreen').addClass('gameStart');
@@ -354,7 +354,7 @@ $(function(){
   // 検品内容を自動設定
   function setCheckList(){
     const res = new Object();
-    res.count = Math.floor(Math.random() * (30 - 15) + 15);
+    res.count = Math.floor(Math.random() * (35 - 15) + 15);
     let i = Math.floor(Math.random() * boardsOrigin.length);
     res.board = boardsOrigin[i];
     // skuを生成する
@@ -390,7 +390,6 @@ $(function(){
 
 
   // 制限時間処理
-
   function updateTimer(){
     const timeLeft = startTime + timeLimit - Date.now();
     $('#timer').text((timeLeft / 1000).toFixed(2));
@@ -407,5 +406,19 @@ $(function(){
         gameOver('timeOver');
       }, 100);
     }
+  }
+
+  function setTimeLimit(){
+    if(P_count >= 15 && P_count <= 20){
+      timeLimit = 20 * 1000;
+    }else if(P_count >= 21 && P_count <= 25){
+      timeLimit = 22 * 1000;
+    }else if(P_count >= 26 && P_count <= 30){
+      timeLimit = 24 * 1000;
+    }else if(P_count >= 31){
+      timeLimit = 26 * 1000;
+    }
+    startTime = Date.now();
+    updateTimer();
   }
 });
