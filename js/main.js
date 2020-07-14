@@ -412,11 +412,11 @@ $(function(){
     if(P_count >= 15 && P_count <= 20){
       timeLimit = 20 * 1000;
     }else if(P_count >= 21 && P_count <= 25){
-      timeLimit = 22 * 1000;
+      timeLimit = 21 * 1000;
     }else if(P_count >= 26 && P_count <= 30){
-      timeLimit = 24 * 1000;
+      timeLimit = 22 * 1000;
     }else if(P_count >= 31){
-      timeLimit = 26 * 1000;
+      timeLimit = 23 * 1000;
     }
     startTime = Date.now();
     updateTimer();
