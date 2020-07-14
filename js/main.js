@@ -254,7 +254,7 @@ $(function(){
       fontSize: 48,
       top: 130,
       opacity: 0
-    }, 600);
+    }, 800);
   }
 
   // 看板決定処理
