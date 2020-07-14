@@ -19,17 +19,20 @@ $(function(){
   let P_board;
   let P_sku_1;
   let P_sku_2;
+  // 制限時間処理関係
+  let startTime;
+  const timeLimit = 15 * 1000;
   // 看板たち
   const boardsOrigin = [
     'peropero',
-    'dededet',
+    'bebebet',
     'UNCHIRI',
     'TheyFashion',
     'Unlucky_cats',
     'suneoStyle',
     'taiku2ichiba',
     'tomodaoresan6',
-    'hwawawawaaa',
+    'peppy_popping',
     'criticalelf'
   ];
   // 看板をシャッフル
@@ -50,6 +53,8 @@ $(function(){
     P_sku_2 = checkList.sku_2;
     // 設定した内容をhtmlに反映
     showCheckList();
+    startTime = Date.now();
+    updateTimer();
 
     $('#startScreen').removeClass('gameStart');
     $('#gameScreen').addClass('gameStart');
@@ -109,17 +114,20 @@ $(function(){
 
     // 最後のゲームなら、結果画面に遷移
     if((index - 1) == 2){
-      $('.mainWrap').removeClass('nowShow');
-      $('#gameScreen').removeClass('gameStart');
-      $('#resultScreen').addClass('gameStart');
-      $('body').addClass('test');
-      showResult();
-      // ゲームをクリアできたかどうか判定
-      judgeResult();
+      gameOver('normal');
     }
 
     $('.next').text(buttonText);
   });
+  function gameOver(reason){
+    $('.mainWrap').removeClass('nowShow');
+    $('#gameScreen').removeClass('gameStart');
+    $('#resultScreen').addClass('gameStart');
+    $('body').addClass('test');
+    // showResult();
+    // ゲームをクリアできたかどうか判定
+    judgeResult(reason);
+  }
 
   let touched3 = false;
   $("#left").bind({
@@ -160,35 +168,6 @@ $(function(){
     }
   });
 
-  // // 左にスライドする処理
-  // $(document).on('click', '#left', function(){
-  //   // 現在の看板を左に流す
-  //   $('.signBoardList:not(.standBy)').addClass('leftSlide');
-
-  //   $('.signBoardList:not(.standBy)').delay(100).queue(function(){
-  //     // 左に流された看板を一時的に非表示にする
-  //     $(this).addClass('tempStandBy').dequeue();
-  //     // 看板の文字を変更
-  //     changeBoard('left');
-  //   });
-
-    
-  //   // スタンバイ状態の看板を右側にセットし、スタンバイを解除
-  //   $('.signBoardList.standBy').addClass('rightSlide');
-  //   $('.signBoardList').removeClass('standBy');
-    
-  //   $('.signBoardList.rightSlide').delay(200).queue(function(){
-  //     // 右側の看板を通常の位置に戻す
-  //     $('.signBoardList').removeClass('rightSlide'); 
-  //     // 左に流した看板をスタンバイ状態にする
-  //     $('.signBoardList.leftSlide').addClass('standBy');
-  //     // 左にセットされている状態を解除
-  //     $('.signBoardList').removeClass('leftSlide');
-  //     // 一時的な非表示を解除
-  //     $('.signBoardList').removeClass('tempStandBy').dequeue();
-  //   });
-  // });
-
   let touched2 = false;
   $("#right").bind({
     'touchstart mousedown': function(e) {
@@ -227,41 +206,6 @@ $(function(){
       e.preventDefault();
     }
   });
-
-  // 右にスライドする処理
-  // $(document).on('click', '#right', function(){
-  //   // 現在の看板を右に流す
-  //   $('.signBoardList:not(.standBy)').addClass('rightSlide');
-
-  //   $('.signBoardList:not(.standBy)').delay(100).queue(function(){
-  //     // 右に流された看板を一時的に非表示にする
-  //     $(this).addClass('tempStandBy').dequeue();
-  //     // 看板の文字を変更
-  //     changeBoard('right');
-  //   });
-
-
-  //   // スタンバイ状態の看板を左側にセットし、スタンバイを解除
-  //   $('.signBoardList.standBy').addClass('leftSlide');
-  //   $('.signBoardList').removeClass('standBy');
-    
-  //   $('.signBoardList.leftSlide').delay(100).queue(function(){
-  //     // 左側の看板を通常の位置に戻す
-  //     $('.signBoardList').removeClass('leftSlide'); 
-  //     // 右に流した看板をスタンバイ状態にする
-  //     $('.signBoardList.rightSlide').addClass('standBy');
-  //     // 右にセットされている状態を解除
-  //     $('.signBoardList').removeClass('rightSlide');
-  //     // 一時的な非表示を解除
-  //     $('.signBoardList').removeClass('tempStandBy').dequeue();
-  //   });
-  // });
-
-  // カウント処理
-  // $(document).on('click', '.countButton', function(){
-  //   count++;
-  //   $('.testCount').text(count);
-  // });
 
   // カウント処理・改
   // スマホでも連打が可能に
@@ -337,22 +281,28 @@ $(function(){
   }
 
   // ゲームをクリアできたかどうか判定
-  function judgeResult(){
+  function judgeResult(reason){
     let missReason;
 
-    // 失敗の場合、失敗した理由を保持
-    if(P_count != count){
-      missReason = 'カウントミス';
-    }else if(P_board != decidedBorad){
-      missReason = '看板選択ミス';
-    }else if(P_sku_1 != sku_1 || P_sku_2 != sku_2){
-      missReason = '看板記入ミス';
+    // 時間切れかそうじゃないか
+    if(reason == 'normal'){
+      // 失敗の場合、失敗した理由を保持
+      if(P_count != count){
+        missReason = 'カウントミス';
+      }else if(P_board != decidedBorad){
+        missReason = '看板選択ミス';
+      }else if(P_sku_1 != sku_1 || P_sku_2 != sku_2){
+        missReason = '看板記入ミス';
+      }
+    }else{
+      missReason = '時間切れ';
     }
 
     // 結果画面のhtml表示を分岐させる
     const result = $('#resultScreen');
     if(missReason){
       wage = 1250;
+      $('.hourlyWage').text(wage);
       result.children('h1').text('検品失敗……');
       result.children('.failed').addClass('nowShow');
       result.find('.speachBubble').text('君、クビね');
@@ -402,7 +352,7 @@ $(function(){
   // 検品内容を自動設定
   function setCheckList(){
     const res = new Object();
-    res.count = Math.floor(Math.random() * (30 - 11) + 11);
+    res.count = Math.floor(Math.random() * (30 - 15) + 15);
     let i = Math.floor(Math.random() * boardsOrigin.length);
     res.board = boardsOrigin[i];
     // skuを生成する
@@ -434,5 +384,24 @@ $(function(){
     $('.sellerId').text(P_board);
     $('.sku1').text(P_sku_1);
     $('.sku2').text(P_sku_2);
+  }
+
+
+  // 制限時間処理
+
+  function updateTimer(){
+    const timeLeft = startTime + timeLimit - Date.now();
+    $('#timer').text((timeLeft / 1000).toFixed(2));
+
+    const timeoutId = setTimeout(() => {
+      updateTimer();
+    }, 10);
+
+    if(timeLeft < 0){
+      clearTimeout(timeoutId);
+      setTimeout(() => {
+        gameOver('timeOver');
+      }, 100);
+    }
   }
 });
