@@ -352,6 +352,7 @@ $(function(){
     // 結果画面のhtml表示を分岐させる
     const result = $('#resultScreen');
     if(missReason){
+      wage = 1250;
       result.children('h1').text('検品失敗……');
       result.children('.failed').addClass('nowShow');
       result.find('.speachBubble').text('君、クビね');
