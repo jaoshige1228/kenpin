@@ -121,63 +121,141 @@ $(function(){
     $('.next').text(buttonText);
   });
 
-  // 左にスライドする処理
-  $(document).on('click', '#left', function(){
-    // 現在の看板を左に流す
-    $('.signBoardList:not(.standBy)').addClass('leftSlide');
+  let touched3 = false;
+  $("#left").bind({
+    'touchstart mousedown': function(e) {
+      touched3 = true;
+      e.preventDefault();
+    },
+    'touchend mouseup': function(e) {
+      if (touched3) {
+        // 現在の看板を左に流す
+        $('.signBoardList:not(.standBy)').addClass('leftSlide');
 
-    $('.signBoardList:not(.standBy)').delay(100).queue(function(){
-      // 左に流された看板を一時的に非表示にする
-      $(this).addClass('tempStandBy').dequeue();
-      // 看板の文字を変更
-      changeBoard('left');
-    });
+        $('.signBoardList:not(.standBy)').delay(100).queue(function(){
+          // 左に流された看板を一時的に非表示にする
+          $(this).addClass('tempStandBy').dequeue();
+          // 看板の文字を変更
+          changeBoard('left');
+        });
+
+        
+        // スタンバイ状態の看板を右側にセットし、スタンバイを解除
+        $('.signBoardList.standBy').addClass('rightSlide');
+        $('.signBoardList').removeClass('standBy');
+        
+        $('.signBoardList.rightSlide').delay(200).queue(function(){
+          // 右側の看板を通常の位置に戻す
+          $('.signBoardList').removeClass('rightSlide'); 
+          // 左に流した看板をスタンバイ状態にする
+          $('.signBoardList.leftSlide').addClass('standBy');
+          // 左にセットされている状態を解除
+          $('.signBoardList').removeClass('leftSlide');
+          // 一時的な非表示を解除
+          $('.signBoardList').removeClass('tempStandBy').dequeue();
+        });
+      }
+      touched3 = false;
+      e.preventDefault();
+    }
+  });
+
+  // // 左にスライドする処理
+  // $(document).on('click', '#left', function(){
+  //   // 現在の看板を左に流す
+  //   $('.signBoardList:not(.standBy)').addClass('leftSlide');
+
+  //   $('.signBoardList:not(.standBy)').delay(100).queue(function(){
+  //     // 左に流された看板を一時的に非表示にする
+  //     $(this).addClass('tempStandBy').dequeue();
+  //     // 看板の文字を変更
+  //     changeBoard('left');
+  //   });
 
     
-    // スタンバイ状態の看板を右側にセットし、スタンバイを解除
-    $('.signBoardList.standBy').addClass('rightSlide');
-    $('.signBoardList').removeClass('standBy');
+  //   // スタンバイ状態の看板を右側にセットし、スタンバイを解除
+  //   $('.signBoardList.standBy').addClass('rightSlide');
+  //   $('.signBoardList').removeClass('standBy');
     
-    $('.signBoardList.rightSlide').delay(200).queue(function(){
-      // 右側の看板を通常の位置に戻す
-      $('.signBoardList').removeClass('rightSlide'); 
-      // 左に流した看板をスタンバイ状態にする
-      $('.signBoardList.leftSlide').addClass('standBy');
-      // 左にセットされている状態を解除
-      $('.signBoardList').removeClass('leftSlide');
-      // 一時的な非表示を解除
-      $('.signBoardList').removeClass('tempStandBy').dequeue();
-    });
+  //   $('.signBoardList.rightSlide').delay(200).queue(function(){
+  //     // 右側の看板を通常の位置に戻す
+  //     $('.signBoardList').removeClass('rightSlide'); 
+  //     // 左に流した看板をスタンバイ状態にする
+  //     $('.signBoardList.leftSlide').addClass('standBy');
+  //     // 左にセットされている状態を解除
+  //     $('.signBoardList').removeClass('leftSlide');
+  //     // 一時的な非表示を解除
+  //     $('.signBoardList').removeClass('tempStandBy').dequeue();
+  //   });
+  // });
+
+  let touched2 = false;
+  $("#right").bind({
+    'touchstart mousedown': function(e) {
+      touched2 = true;
+      e.preventDefault();
+    },
+    'touchend mouseup': function(e) {
+      if (touched2) {
+        // 現在の看板を右に流す
+        $('.signBoardList:not(.standBy)').addClass('rightSlide');
+
+        $('.signBoardList:not(.standBy)').delay(100).queue(function(){
+          // 右に流された看板を一時的に非表示にする
+          $(this).addClass('tempStandBy').dequeue();
+          // 看板の文字を変更
+          changeBoard('right');
+        });
+
+
+        // スタンバイ状態の看板を左側にセットし、スタンバイを解除
+        $('.signBoardList.standBy').addClass('leftSlide');
+        $('.signBoardList').removeClass('standBy');
+        
+        $('.signBoardList.leftSlide').delay(100).queue(function(){
+          // 左側の看板を通常の位置に戻す
+          $('.signBoardList').removeClass('leftSlide'); 
+          // 右に流した看板をスタンバイ状態にする
+          $('.signBoardList.rightSlide').addClass('standBy');
+          // 右にセットされている状態を解除
+          $('.signBoardList').removeClass('rightSlide');
+          // 一時的な非表示を解除
+          $('.signBoardList').removeClass('tempStandBy').dequeue();
+        });
+      }
+      touched2 = false;
+      e.preventDefault();
+    }
   });
 
   // 右にスライドする処理
-  $(document).on('click', '#right', function(){
-    // 現在の看板を右に流す
-    $('.signBoardList:not(.standBy)').addClass('rightSlide');
+  // $(document).on('click', '#right', function(){
+  //   // 現在の看板を右に流す
+  //   $('.signBoardList:not(.standBy)').addClass('rightSlide');
 
-    $('.signBoardList:not(.standBy)').delay(100).queue(function(){
-      // 右に流された看板を一時的に非表示にする
-      $(this).addClass('tempStandBy').dequeue();
-      // 看板の文字を変更
-      changeBoard('right');
-    });
+  //   $('.signBoardList:not(.standBy)').delay(100).queue(function(){
+  //     // 右に流された看板を一時的に非表示にする
+  //     $(this).addClass('tempStandBy').dequeue();
+  //     // 看板の文字を変更
+  //     changeBoard('right');
+  //   });
 
 
-    // スタンバイ状態の看板を左側にセットし、スタンバイを解除
-    $('.signBoardList.standBy').addClass('leftSlide');
-    $('.signBoardList').removeClass('standBy');
+  //   // スタンバイ状態の看板を左側にセットし、スタンバイを解除
+  //   $('.signBoardList.standBy').addClass('leftSlide');
+  //   $('.signBoardList').removeClass('standBy');
     
-    $('.signBoardList.leftSlide').delay(100).queue(function(){
-      // 左側の看板を通常の位置に戻す
-      $('.signBoardList').removeClass('leftSlide'); 
-      // 右に流した看板をスタンバイ状態にする
-      $('.signBoardList.rightSlide').addClass('standBy');
-      // 右にセットされている状態を解除
-      $('.signBoardList').removeClass('rightSlide');
-      // 一時的な非表示を解除
-      $('.signBoardList').removeClass('tempStandBy').dequeue();
-    });
-  });
+  //   $('.signBoardList.leftSlide').delay(100).queue(function(){
+  //     // 左側の看板を通常の位置に戻す
+  //     $('.signBoardList').removeClass('leftSlide'); 
+  //     // 右に流した看板をスタンバイ状態にする
+  //     $('.signBoardList.rightSlide').addClass('standBy');
+  //     // 右にセットされている状態を解除
+  //     $('.signBoardList').removeClass('rightSlide');
+  //     // 一時的な非表示を解除
+  //     $('.signBoardList').removeClass('tempStandBy').dequeue();
+  //   });
+  // });
 
   // カウント処理
   // $(document).on('click', '.countButton', function(){
@@ -185,6 +263,8 @@ $(function(){
   //   $('.testCount').text(count);
   // });
 
+  // カウント処理・改
+  // スマホでも連打が可能に
   let touched = false;
   $(".countButton").bind({
     'touchstart mousedown': function(e) { // PCにも対応させるなら、touchstartではなくmousedown
@@ -194,7 +274,6 @@ $(function(){
     'touchend mouseup': function(e) {
       if (touched) {
         count++;
-        $('.testCount').text(count);
       }
       touched = false;
       e.preventDefault();
