@@ -180,9 +180,25 @@ $(function(){
   });
 
   // カウント処理
-  $(document).on('click', '.countButton', function(){
-    count++;
-    $('.testCount').text(count);
+  // $(document).on('click', '.countButton', function(){
+  //   count++;
+  //   $('.testCount').text(count);
+  // });
+
+  let touched = false;
+  $(".countButton").bind({
+    'touchstart mousedown': function(e) { // PCにも対応させるなら、touchstartではなくmousedown
+      touched = true;
+      e.preventDefault(); // このイベントに紐つく動作をキャンセル
+    },
+    'touchend mouseup': function(e) {
+      if (touched) {
+        count++;
+        $('.testCount').text(count);
+      }
+      touched = false;
+      e.preventDefault();
+    }
   });
 
   // ルール説明表示
