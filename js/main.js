@@ -21,7 +21,8 @@ $(function(){
   let P_sku_2;
   // 制限時間処理関係
   let startTime;
-  const timeLimit = 15 * 1000;
+  const timeLimit = 17 * 1000;
+  let timeoutId;
   // 看板たち
   const boardsOrigin = [
     'peropero',
@@ -283,6 +284,7 @@ $(function(){
   // ゲームをクリアできたかどうか判定
   function judgeResult(reason){
     let missReason;
+    clearTimeout(timeoutId);
 
     // 時間切れかそうじゃないか
     if(reason == 'normal'){
@@ -393,13 +395,15 @@ $(function(){
     const timeLeft = startTime + timeLimit - Date.now();
     $('#timer').text((timeLeft / 1000).toFixed(2));
 
-    const timeoutId = setTimeout(() => {
+    timeoutId = setTimeout(() => {
       updateTimer();
     }, 10);
 
     if(timeLeft < 0){
-      clearTimeout(timeoutId);
+      // clearTimeout(timeoutId);
       setTimeout(() => {
+        $('#board_input_1').val('');
+        $('#board_input_2').val('');
         gameOver('timeOver');
       }, 100);
     }
