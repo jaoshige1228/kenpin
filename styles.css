@@ -1,0 +1,308 @@
+body{
+  background: rgb(220, 220, 255);
+  /* width: 380px; */
+  margin: 0 auto;
+}
+html{
+  height: 100%;
+}
+.nowShow, .gameStart{
+  display: block!important;
+}
+
+#startScreen, #gameScreen, .mainWrap, #resultScreen, .success, .failed{
+  display: none;
+}
+main{
+  height: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ルール説明画面 */
+.explanation{
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  width: 320px;
+  height: 620px;
+  background: white;
+  border-radius: 30px;
+  padding: 10px;
+  z-index: 3;
+  transition: 0.2s;
+}
+.exp{
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.expTitle{
+  font-weight: bold;
+  font-size: 32px;
+  margin: 10px 0;
+  text-align: center;
+}
+.explanation img{
+  display: block;
+  margin: 0 auto;
+}
+.expNext{
+  width: 150px;
+  height: 50px;
+  background: red;
+  margin: 0 auto;
+  border-radius: 30px;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  font-size: 20px;
+}
+.exp_hidden{
+  transform: translate(-50%, -800px);
+}
+
+/* スタート画面 */
+#title{
+  font-size: 58px;
+  text-shadow: 1px 2px 3px #808080;
+  font-family: "游明朝", YuMincho, "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  /* font-style: italic; */
+  color: rgb(40, 40, 40), italic;
+  text-align: center;
+  margin-top: 100px;
+}
+#wage{
+  font-style: italic;
+  margin-left: 20px;
+}
+.hourlyWage{
+  font-weight: bold;
+}
+
+.startButtonWrap{
+  /* background: red; */
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+#startButton, #endButton, #expButton{
+  width: 200px;
+  height: 60px;
+  background: red;
+  color: white;
+  border-radius: 20px;
+  margin: 0 auto;
+  margin-top: 100px;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  line-height: 60px;
+  box-shadow: 0 6px rgb(200, 0, 0);
+}
+
+
+/* カウント画面 */
+.timerWrap{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+.timerWrap > p{
+  margin: 6px 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+#information > p{
+  margin: 4px 0;
+  font-size: 20px;
+}
+.countButton{
+  width: 160px;
+  height: 140px;
+  background: rgb(100, 100, 200);
+  color: white;
+  text-align: center;
+  line-height: 140px;
+  font-weight: bold;
+  font-size: 24px;
+  border-radius: 50%;
+  box-shadow: 0 10px rgb(50, 50, 150);
+  user-select: none;
+  /* margin: 0 auto; */
+}
+.countButton:active{
+  box-shadow: 0 5px rgb(50, 50, 150);
+  margin-top: 10px;
+}
+.next{
+  width: 180px;
+  height: 60px;
+  background: red;
+  color: white;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 60px;
+  font-size: 24px;
+  text-align: center;
+  line-height: 60px;
+}
+
+/* 看板選択画面 */
+.signBoardWrap{
+  display: flex;
+  width: 95%;
+  height: 300px;
+  justify-content: space-between;
+  align-items: center;
+}
+.signBoardList, .signBoardList_input{
+  width: 320px!important;
+  height: 160px;
+  background: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.1s;
+}
+.boardContent_1{
+  /* background: red; */
+  height: 45px;
+  padding-left: 8px;
+  line-height: 45px;
+  font-size: 26px;
+}
+.boardContent_2{
+  /* background: blue; */
+  height: 70px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+.boardContent_3{
+  /* background: green; */
+  height: 45px;
+}
+#left, #right{
+  font-size: 32px;
+  color: rgb(50, 50, 150, 0.6);
+}
+.leftSlide{
+  transform: translate(-500px, 0);
+}
+.rightSlide{
+  transform: translate(500px, 0);
+}
+.standBy{
+  display: none;
+}
+.tempStandBy{
+  display: none;
+}
+
+/* 看板記入画面 */
+.boardContent_2{
+  line-height: 70px;
+}
+#board_input_1{
+  height: 50px;
+  width: 180px;
+  margin: 0 5px;
+  font-size: 26px;
+  letter-spacing: 4px;
+}
+#board_input_2{
+  width: 50px;
+  height: 50px;
+  margin: 0 5px;
+  font-size: 26px;
+  letter-spacing: 4px;
+}
+
+/* 結果画面 */
+#resultScreen{
+  background: rgb(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+}
+.test{
+  /* width: 100%;  */
+  margin: 0!important;
+  padding: 0!important;
+  height: 100%;
+}
+#resultScreen h1{
+  margin: 0 auto;
+  padding: 0;
+  color: yellow;
+  font-style: italic;
+  font-size: 48px;
+  text-align: center;
+  padding: 50px 0;
+}
+.success, .failed{
+  color: white;
+  text-align: center;
+}
+.failed{
+  padding: 50px 0; 
+}
+.success p{
+  font-style: italic;
+}
+.comment{
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.comment img{
+  width: 80px;
+}
+
+.speachBubble {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0 1.5em 15px;
+  padding: 14px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #555;
+  font-size: 16px;
+  text-align: center;
+  background: white;
+  border-radius: 5px;
+}
+
+.speachBubble:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-right: 15px solid white;
+}
+
+.direction{
+  width: 350px;
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  text-align: center;
+  font-size: 40px;
+  color: red;
+}
+.resetAnimation{
+  font-size: 40px;
+  top: 150px;
+  opacity: 1;
+}

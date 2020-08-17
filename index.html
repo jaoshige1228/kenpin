@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE・検品</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- スタート画面 -->
+  <div id="startScreen" class="gameStart">
+    <h1 id="title">THE・検品</h1>
+    <p id="wage">時給：<span class="hourlyWage"></span>円</p>
+    <div class="startButtonWrap">
+      <div id="startButton">
+        スタート
+      </div>
+      <div id="expButton">
+        検品のルール
+      </div>
+    </div>
+    <!-- ルール説明ウィンドウ -->
+    <div class="explanation exp_hidden">
+      <div class="exp nowShow">
+        <p class="expTitle">＜カウント＞</p>
+        <img src="images/exp_count.JPG">
+        <p class="expText"><b>qty</b>に示されている数と同じだけ、ボタンを押してください。<br><b>ボタンを押した回数は表示されない</b>ので、心の中でしっかり数えましょう。</p>
+        <div class="expNext">次へ</div>
+      </div>
+
+      <div class="exp">
+        <p class="expTitle">＜看板選択＞</p>
+        <img src="images/exp_board.JPG">
+        <p class="expText">左右の矢印で看板を切り替え、<b>Seller Id</b>に示されている名前と同じものを選びましょう。</p>
+        <div class="expNext">次へ</div>
+      </div>
+
+      <div class="exp">
+        <p class="expTitle">＜看板記入＞</p>
+        <img src="images/exp_input.JPG">
+        <p class="expText"><b>SKU</b>に示されている数値を、記入欄に正確に書き入れましょう。</p>
+        <div class="expNext">終了</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="gameScreen">
+    <div class="timerWrap">
+      <p id="timer">00:10.000</p>
+    </div>
+    <div id="information">
+      <p>qty：<span class="qty"></span></p>
+      <p>Seller Id：<span class="sellerId"></span></p>
+      <p>SKU：<span class="sku1"></span> - <span class="sku2"></span></p>
+    </div>
+    <h1 class="direction"></h1>
+
+    <!-- カウント画面 -->
+    <div class="mainWrap nowShow">
+      <main id="countButtonWrap">
+        <div class="countButton"  ontouchstart="">
+          数える
+        </div>
+      </main>
+    </div>
+
+    <!-- 看板選択画面 -->
+    <div class="mainWrap">
+      <main>
+        <div class="signBoardWrap">
+          <div id="left">
+            &lt;
+          </div>
+
+          <div class="signBoardList">
+            <div class="boardContent_1">peropero</div>
+            <div class="boardContent_2">
+              
+            </div>
+            <div class="boardContent_3">
+              
+            </div>
+          </div>
+
+          <div class="signBoardList standBy">
+            <div class="boardContent_1">UNCHIRI</div>
+            <div class="boardContent_2">
+              
+            </div>
+            <div class="boardContent_3">
+              
+            </div>
+          </div>
+
+          <div id="right">
+            &gt;
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- 看板記入画面 -->
+    <div class="mainWrap">
+      <main>
+        <div class="signBoardWrap_input">
+          <div class="signBoardList_input">
+            <div class="boardContent_1">peropero</div>
+            <div class="boardContent_2">
+              <input type="number" id="board_input_1">➖<input type="number" id="board_input_2">
+            </div>
+            <div class="boardContent_3">
+              
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="next">
+      完了
+    </div>
+  </div>
+
+  <div id="resultScreen">
+    <h1></h1>
+    <div class="success">
+      <h3>時給がアップした！</h3>
+      <p><span class="preWage">1250</span>円→<b class="newWage">1300</b>円</p>
+    </div>
+    <div class="failed">
+      <h2>失敗理由：<span class="missReason"></span></h2>
+    </div>
+    <div class="comment">
+      <img src="images/oyazi.PNG" alt="">
+      <div class="speachBubble"></div>
+    </div>
+    <div class="startButtonWrap">
+      <div id="endButton">
+        タイトルへ
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
